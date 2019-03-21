@@ -1,11 +1,24 @@
 import React from "react";
-import {AmplifyTheme, withAuthenticator} from "aws-amplify-react"
+import {AmplifyTheme, Authenticator} from "aws-amplify-react"
 import "./App.css";
 
+
 class App extends React.Component {
-    state = {};
+    state = {
+        user: null
+    };
+
+    compnentDidMount() {
+
+    }
 
     render() {
+        const { user } = this.state;
+
+        return !user ? (
+            <Authenticator theme={(theme)} />
+        ) :
+        )
         return <div>App</div>;
     }
 }
@@ -30,4 +43,5 @@ const theme = {
     }
 };
 
-export default withAuthenticator(App, true, [], null, theme);
+//export default withAuthenticator(App, true, [], null, theme);
+export default App;
