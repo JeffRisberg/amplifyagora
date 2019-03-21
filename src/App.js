@@ -12,6 +12,10 @@ class App extends React.Component {
 
 const theme = {
     ...AmplifyTheme,
+    navBar: {
+        ...AmplifyTheme.navBar,
+        backgroundColor: '#ffc0cb'
+    },
     button: {
         ...AmplifyTheme.button,
         backgroundColor: 'var(--amazonOrange)'
