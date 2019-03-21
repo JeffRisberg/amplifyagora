@@ -1,12 +1,29 @@
 import React from "react";
+import {AmplifyTheme, withAuthenticator} from "aws-amplify-react"
 import "./App.css";
 
 class App extends React.Component {
-  state = {};
+    state = {};
 
-  render() {
-    return <div>App</div>;
-  }
+    render() {
+        return <div>App</div>;
+    }
 }
 
-export default App;
+const theme = {
+    ...AmplifyTheme,
+    button: {
+        ...AmplifyTheme.button,
+        backgroundColor: 'var(--amazonOrange)'
+    },
+    sectionBody: {
+        ...AmplifyTheme.sectionBody,
+        padding: '5px',
+    },
+    sectionHeader: {
+        ...AmplifyTheme.sectionHeader,
+        backgroundColor: 'var(--squidInk)'
+    }
+};
+
+export default withAuthenticator(App, true, [], null, theme);
