@@ -40,6 +40,14 @@ class App extends React.Component {
         }
     };
 
+    handleSignout = async () => {
+        try {
+            await Auth.signOut();
+        } catch (err) {
+            console.error("Error signing out user", err)
+        }
+    };
+
     render() {
         const {user} = this.state;
 
@@ -48,7 +56,8 @@ class App extends React.Component {
                 <Router>
                     <React.Fragment>
                         {/* Navigation */}
-                        <Navbar />
+                        <Navbar user={user} handleSignout={this.handleSignout}/>
+
                         {/* Routes */}
                         <div className="app-container">
                             <Route exact path="/" component={HomePage}/>
@@ -62,25 +71,26 @@ class App extends React.Component {
     }
 }
 
-const theme = {
-    ...AmplifyTheme,
-    navBar: {
-        ...AmplifyTheme.navBar,
-        backgroundColor: '#ffc0cb'
-    },
-    button: {
-        ...AmplifyTheme.button,
-        backgroundColor: 'var(--amazonOrange)'
-    },
-    sectionBody: {
-        ...AmplifyTheme.sectionBody,
-        padding: '5px',
-    },
-    sectionHeader: {
-        ...AmplifyTheme.sectionHeader,
-        backgroundColor: 'var(--squidInk)'
-    }
-};
+const
+    theme = {
+        ...AmplifyTheme,
+        navBar: {
+            ...AmplifyTheme.navBar,
+            backgroundColor: '#ffc0cb'
+        },
+        button: {
+            ...AmplifyTheme.button,
+            backgroundColor: 'var(--amazonOrange)'
+        },
+        sectionBody: {
+            ...AmplifyTheme.sectionBody,
+            padding: '5px',
+        },
+        sectionHeader: {
+            ...AmplifyTheme.sectionHeader,
+            backgroundColor: 'var(--squidInk)'
+        }
+    };
 
 //export default withAuthenticator(App, true, [], null, theme);
 export default App;
