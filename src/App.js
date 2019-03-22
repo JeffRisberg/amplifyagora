@@ -1,6 +1,10 @@
 import React from "react";
 import {Auth, Hub} from "aws-amplify";
 import {AmplifyTheme, Authenticator} from "aws-amplify-react"
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import HomePage from "./pages/HomePage";
+import MarketPage from "./pages/MarketPage";
+import ProfilePage from "./pages/ProfilePage";
 import "./App.css";
 
 
@@ -40,10 +44,19 @@ class App extends React.Component {
     render() {
         const {user} = this.state;
 
-        return !user ? (
-                <Authenticator theme={(theme)}/>
-            ) :
-            <div>App</div>;
+        return !user ?
+            <Authenticator theme={(theme)}/> : (
+                <Router>
+                    <React.Fragment>
+                        {/* routes */}
+                        <div className="appContainer">
+                            <Route exact path="/" component={HomePage}/>
+                            <Route path="/market" component={MarketPage}/>
+                            <Route path="/profile" component={ProfilePage}/>
+                        </div>
+                    </React.Fragment>
+                </Router>
+            );
     }
 }
 
