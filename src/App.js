@@ -5,8 +5,8 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import MarketPage from "./pages/MarketPage";
 import ProfilePage from "./pages/ProfilePage";
+import Navbar from "./components/Navbar";
 import "./App.css";
-
 
 class App extends React.Component {
     state = {
@@ -14,7 +14,6 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        console.dir(AmplifyTheme);
         this.getUserData();
         Hub.listen('auth', this, 'onHubCapsule');
     };
@@ -48,12 +47,14 @@ class App extends React.Component {
             <Authenticator theme={(theme)}/> : (
                 <Router>
                     <React.Fragment>
-                        {/* routes */}
-                        <div className="appContainer">
+                        {/* Navigation */}
+                        <Navbar />
+                        {/* Routes */}
+                        <div className="app-container">
                             <Route exact path="/" component={HomePage}/>
+                            <Route path="/profile" component={ProfilePage}/>
                             <Route path="/markets/:marketId" component={
                                 ({match}) => <MarketPage marketId={match.params.marketId}/>}/>
-                            <Route path="/profile" component={ProfilePage}/>
                         </div>
                     </React.Fragment>
                 </Router>
