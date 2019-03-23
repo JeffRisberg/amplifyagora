@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Dialog, Form, Input} from 'element-react'
-import {API, graphqloperation} from 'aws-amplity';
+import {API, graphqloperation} from 'aws-amplify';
 import {createMarket} from '../graphql/mutations';
 
 class NewMarket extends React.Component {
@@ -16,7 +16,7 @@ class NewMarket extends React.Component {
                 name: this.state.name
             };
             const result = await API.graphql(graphqloperation(createMarket, {input}));
-            console.info(`Created market: id $(result.data.createMarket.id`);
+            console.info(`Created market: id ${result.data.createMarket.id}`);
             this.setState({name: ""});
         } catch (err) {
             Notification.error({
