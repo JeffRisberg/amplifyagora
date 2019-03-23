@@ -1,5 +1,7 @@
 import React from "react";
 import {Button, Dialog, Form, Input} from 'element-react'
+import {API, graphqloperation} from 'aws-amplity';
+import {createMarket} from '../graphql/mutations';
 
 class NewMarket extends React.Component {
     state = {
@@ -7,9 +9,21 @@ class NewMarket extends React.Component {
         addMarketDialog: true
     };
 
-    handleAddMarket = () => {
-        console.log(this.state.name);
-        this.setState({addMarketDialog: false});
+    handleAddMarket = async () => {
+        try {
+            this.setState({addMarketDialog: false});
+            const input = {
+                name: this.state.name
+            };
+            const result = await API.graphql(graphqloperation(createMarket, {input}));
+            console.info(`Created market: id $(result.data.createMarket.id`);
+            this.setState({name: ""});
+        } catch (err) {
+            Notification.error({
+                title: "Error",
+                message: `${err.message || "Error adding market"}`
+            })
+        }
     };
 
     render() {
@@ -31,7 +45,8 @@ class NewMarket extends React.Component {
                         <Form labelPosition="top">
                             <Form.Item label="Add Market Name">
                                 <Input placeholder="Market Name" trim="true"
-                                       onChange={name => this.setState({name})}/>
+                                       onChange={name => this.setState({name})}
+                                       value={this.state.name}/>
                             </Form.Item>
                         </Form>
                     </Dialog.Body>
