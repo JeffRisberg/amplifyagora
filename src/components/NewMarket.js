@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Dialog, Form, Input, Notification} from 'element-react'
+import {Button, Dialog, Form, Input, Notification, Select} from 'element-react'
 import {API, graphqlOperation} from 'aws-amplify';
 import {createMarket} from '../graphql/mutations';
 import {UserContext} from '../App.js';
@@ -7,6 +7,9 @@ import {UserContext} from '../App.js';
 class NewMarket extends React.Component {
     state = {
         name: "",
+        tags: ["Arts", "Web Dev", "Technology", "Crafts", "Entertainment"],
+        selectedTags: [],
+        options: [],
         addMarketDialog: false
     };
 
@@ -27,6 +30,13 @@ class NewMarket extends React.Component {
                 message: `${err.message || "Error adding market"}`
             })
         }
+    };
+
+    handleFilterTags = (query) => {
+        const options = this.state.tags
+            .map(tag => ({value: tags, label: tag}))
+            .filter(tag => tag.label.toLowerCase().includes(query.toLowerCase()))
+        this.setState({options});
     };
 
     render() {
@@ -51,6 +61,14 @@ class NewMarket extends React.Component {
                                     <Input placeholder="Market Name" trim={true}
                                            onChange={name => this.setState({name})}
                                            value={this.state.name}/>
+                                </Form.Item>
+                                <Form.Item label="Add Tags">
+                                    <Select multiple={true}
+                                            filterable={true}
+                                            placeholder={"Market Tags"}
+                                            onChange={selectedTags => this.setState({selectedTags})}
+                                            removeMethod={this.handleFilterTags}
+                                            remote={true}/>
                                 </Form.Item>
                             </Form>
                         </Dialog.Body>
