@@ -1,12 +1,12 @@
 import React from "react";
-import {Button, Dialog, Form, Input} from 'element-react'
+import {Button, Dialog, Form, Input, Notification} from 'element-react'
 import {API, graphqloperation} from 'aws-amplify';
 import {createMarket} from '../graphql/mutations';
 
 class NewMarket extends React.Component {
     state = {
         name: "",
-        addMarketDialog: true
+        addMarketDialog: false
     };
 
     handleAddMarket = async () => {
@@ -44,7 +44,7 @@ class NewMarket extends React.Component {
                     <Dialog.Body>
                         <Form labelPosition="top">
                             <Form.Item label="Add Market Name">
-                                <Input placeholder="Market Name" trim="true"
+                                <Input placeholder="Market Name" trim={true}
                                        onChange={name => this.setState({name})}
                                        value={this.state.name}/>
                             </Form.Item>
