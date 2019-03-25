@@ -69,7 +69,15 @@ class NewMarket extends React.Component {
                                             placeholder={"Market Tags"}
                                             onChange={selectedTags => this.setState({selectedTags})}
                                             remoteMethod={this.handleFilterTags}
-                                            remote={true}/>
+                                            remote={true}>
+                                        {this.state.options.map(option => (
+                                            <Select.Option
+                                                key={option.value}
+                                                label={option.label}
+                                                value={option.value}
+                                            />
+                                        ))}
+                                    </Select>
                                 </Form.Item>
                             </Form>
                         </Dialog.Body>
