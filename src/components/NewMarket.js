@@ -67,7 +67,7 @@ class NewMarket extends React.Component {
                                             filterable={true}
                                             placeholder={"Market Tags"}
                                             onChange={selectedTags => this.setState({selectedTags})}
-                                            removeMethod={this.handleFilterTags}
+                                            remoteMethod={this.handleFilterTags}
                                             remote={true}/>
                                 </Form.Item>
                             </Form>
