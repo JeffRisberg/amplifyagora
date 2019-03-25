@@ -33,8 +33,9 @@ class NewMarket extends React.Component {
     };
 
     handleFilterTags = (query) => {
+        console.log("handleFilterTags");
         const options = this.state.tags
-            .map(tag => ({value: tags, label: tag}))
+            .map(tag => ({value: tag, label: tag}))
             .filter(tag => tag.label.toLowerCase().includes(query.toLowerCase()))
         this.setState({options});
     };
