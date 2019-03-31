@@ -27,6 +27,7 @@ const MarketList = ({searchResults}) => {
             {({data, loading, errors}) => {
                 if (errors.length > 0) return <Error errors={errors}/>;
                 if (loading || !data.listMarkets) return <Loading fullscreen={true}/>;
+
                 const markets =
                     searchResults.length > 0 ? searchResults : data.listMarkets.items;
 
