@@ -25,7 +25,6 @@ class NewMarket extends React.Component {
             const result = await API.graphql(
                 graphqlOperation(createMarket, {input})
             );
-            console.log({result});
             console.info(`Created market: id ${result.data.createMarket.id}`);
             this.setState({name: "", selectedTags: []});
         } catch (err) {
@@ -43,6 +42,11 @@ class NewMarket extends React.Component {
             .filter(tag => tag.label.toLowerCase().includes(query.toLowerCase()));
         this.setState({options});
     };
+
+    componentDidMount() {
+        this.setState({selectedTags: []})
+        this.handleFilterTags("");
+    }
 
     render() {
         return (
