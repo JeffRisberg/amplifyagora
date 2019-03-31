@@ -57,7 +57,7 @@ const MarketList = () => {
                         {market.name}
                       </Link>
                       <span style={{color: "var(--darkAmazonOrange)"}}>
-                        {market.products.items.length}
+                        {market.products.items ? market.products.items.length : 0}
                       </span>
                       <img
                           src="https://icon.now.sh/shopping_cart/f60"

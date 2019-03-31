@@ -43,11 +43,6 @@ class NewMarket extends React.Component {
         this.setState({options});
     };
 
-    componentDidMount() {
-        this.setState({selectedTags: []})
-        this.handleFilterTags("");
-    }
-
     render() {
         return (
             <UserContext.Consumer>
