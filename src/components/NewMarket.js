@@ -1,7 +1,6 @@
 import React from "react";
 import {API, graphqlOperation} from "aws-amplify";
 import {createMarket} from "../graphql/mutations";
-// prettier-ignore
 import {Button, Dialog, Form, Input, Notification, Select} from 'element-react'
 import {UserContext} from "../App";
 
@@ -107,6 +106,7 @@ class NewMarket extends React.Component {
                                             onChange={selectedTags => this.setState({selectedTags})}
                                             remoteMethod={this.handleFilterTags}
                                             remote={true}
+                                            value={this.state.selectedTags}
                                         >
                                             {this.state.options.map(option => (
                                                 <Select.Option
