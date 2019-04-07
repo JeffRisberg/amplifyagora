@@ -7,7 +7,7 @@ import {Card, Icon, Loading, Tag} from "element-react";
 import {Link} from "react-router-dom";
 import Error from "./Error";
 
-const MarketList = ({searchResults}) => {
+const MarketList = ({searchResults, searchTerm}) => {
 
     const onNewMarket = (prevQuery, newData) => {
         let updatedQuery = {...prevQuery};
@@ -35,8 +35,8 @@ const MarketList = ({searchResults}) => {
                     <>
                         {searchResults.length > 0 ? (
                             <h2 className="text-green">
-                                <Icon type="success" name="chech" className="icon"/>
-                                {searchResults.length}
+                                <Icon type="success" name="check" className="icon"/>
+                                {searchResults.length} Results for {searchTerm}
                             </h2>
                         ) : (
                             <h2 className="header">

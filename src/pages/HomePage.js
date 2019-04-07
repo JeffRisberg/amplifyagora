@@ -54,7 +54,9 @@ class HomePage extends React.Component {
                     handleClearSearch={this.handleClearSearch}
                     handleSearch={this.handleSearch}
                 />
-                <MarketList searchResults={this.state.searchResults} />
+                <MarketList
+                    searchTerm={this.state.searchTerm}
+                    searchResults={this.state.searchResults} />
             </>
         );
     }
