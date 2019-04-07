@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import Error from "./Error";
 
 const MarketList = () => {
+
     const onNewMarket = (prevQuery, newData) => {
         let updatedQuery = {...prevQuery};
         const updatedMarketList = [
