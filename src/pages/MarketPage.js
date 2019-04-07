@@ -177,11 +177,11 @@ class MarketPage extends React.Component {
                         }
                         name="2"
                     >
-                        <div className="product-list">
+                        {/*<div className="product-list">
                             {market.products.items.map(product => (
                                 <Product key={product.id} product={product}/>
                             ))}
-                        </div>
+                        </div>*/}
                     </Tabs.Pane>
                 </Tabs>
             </>
