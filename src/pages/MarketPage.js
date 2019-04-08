@@ -5,7 +5,6 @@ import {onCreateProduct, onDeleteProduct, onUpdateProduct} from "../graphql/subs
 import {Icon, Loading, Tabs} from "element-react";
 import {Link} from "react-router-dom";
 import NewProduct from "../components/NewProduct";
-import {formatProductDate} from "../utils";
 
 const getMarket = `query GetMarket($id: ID!) {
   getMarket(id: $id) {
@@ -138,10 +137,10 @@ class MarketPage extends React.Component {
           <h2 className="mb-mr">{market.name}</h2>- {market.owner}
         </span>
                 <div className="items-center pt-2">
-                    {/*<span style={{color: "var(--lightSquidInk)", paddingBottom: "1em"}}>
+                    <span style={{color: "var(--lightSquidInk)", paddingBottom: "1em"}}>
             <Icon name="date" className="icon"/>
-              {formatProductDate(market.createdAt)}
-          </span>*/}
+                        {market.createdAt}
+          </span>
                 </div>
 
                 {/* New Product */}
