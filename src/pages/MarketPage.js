@@ -36,7 +36,7 @@ class MarketPage extends React.Component {
         market: null,
         isLoading: true,
         isMarketOwner: false,
-        isEmailVerified: false
+        isEmailVerified: true
     };
 
     componentDidMount() {
