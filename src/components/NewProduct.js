@@ -4,7 +4,6 @@ import {createProduct} from "../graphql/mutations";
 import {PhotoPicker} from "aws-amplify-react";
 import aws_exports from "../aws-exports";
 import {Button, Form, Input, Notification, Progress, Radio} from "element-react";
-import {convertDollarsToCents} from "../utils";
 
 const initialState = {
     description: "",
@@ -24,9 +23,8 @@ class NewProduct extends React.Component {
             this.setState({isUploading: true});
             const visibility = "public";
             const {identityId} = await Auth.currentCredentials();
-            const filename = `/${visibility}/${identityId}/${Date.now()}-${
-                this.state.image.name
-                }`;
+            const filename = `/${visibility}/${identityId}/${Date.now()}-${this.state.image.name}`;
+            console.log(filename);
             const uploadedFile = await Storage.put(filename, this.state.image.file, {
                 contentType: this.state.image.type,
                 progressCallback: progress => {
@@ -37,7 +35,7 @@ class NewProduct extends React.Component {
                     this.setState({percentUploaded});
                 }
             });
-            const file = {
+            const file = {  // shape of S3 object
                 key: uploadedFile.key,
                 bucket: aws_exports.aws_user_files_s3_bucket,
                 region: aws_exports.aws_project_region
@@ -46,7 +44,7 @@ class NewProduct extends React.Component {
                 productMarketId: this.props.marketId,
                 description: this.state.description,
                 shipped: this.state.shipped,
-                price: convertDollarsToCents(this.state.price),
+                price: this.state.price,
                 file
             };
             const result = await API.graphql(
