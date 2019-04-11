@@ -5,6 +5,7 @@ import {onCreateProduct, onDeleteProduct, onUpdateProduct} from "../graphql/subs
 import {Icon, Loading, Tabs} from "element-react";
 import {Link} from "react-router-dom";
 import NewProduct from "../components/NewProduct";
+import Product from "../components/Product"
 
 const getMarket = `query GetMarket($id: ID!) {
   getMarket(id: $id) {
@@ -175,11 +176,11 @@ class MarketPage extends React.Component {
                         }
                         name="2"
                     >
-                        {/*<div className="product-list">
+                        <div className="product-list">
                             {market.products.items.map(product => (
                                 <Product key={product.id} product={product}/>
                             ))}
-                        </div>*/}
+                        </div>
                     </Tabs.Pane>
                 </Tabs>
             </>
