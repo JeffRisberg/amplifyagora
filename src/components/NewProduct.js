@@ -24,7 +24,7 @@ class NewProduct extends React.Component {
             const visibility = "public";
             const {identityId} = await Auth.currentCredentials();
             const filename = `/${visibility}/${identityId}/${Date.now()}-${this.state.image.name}`;
-            console.log(filename);
+
             const uploadedFile = await Storage.put(filename, this.state.image.file, {
                 contentType: this.state.image.type,
                 progressCallback: progress => {
@@ -125,6 +125,7 @@ class NewProduct extends React.Component {
                             <Progress
                                 type="circle"
                                 className="progress"
+                                status="success"
                                 percentage={percentUploaded}
                             />
                         )}
