@@ -1,4 +1,5 @@
 import React from "react";
+import {Button} from 'element-react';
 import {S3Image} from "aws-amplify-react";
 import {Card} from "element-react";
 import {convertCentsToDollars} from "../utils";
@@ -56,14 +57,29 @@ class Product extends React.Component {
                       ${convertCentsToDollars(product.price)}
                     </span>
                                         {!isProductOwner && (
-                                        <PayButton
-                                            product={product}
-                                            userAttributes={userAttributes}
-                                        />
+                                            <PayButton
+                                                product={product}
+                                                userAttributes={userAttributes}
+                                            />
                                         )}
                                     </div>
                                 </div>
                             </Card>
+                            {/* editing */}
+                            {isProductOwner && (
+                                <>
+                                    <Button
+                                        type="warning"
+                                        icon="edit"
+                                        className="m-1"
+                                        onClick={() => this.setState({updateProductDialog: true})}
+                                    />
+                                    <Button
+                                        type="danger"
+                                        icon="delete"
+                                    />
+                                </>
+                            )}
                         </div>
                     );
                 }}
