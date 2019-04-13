@@ -1,6 +1,5 @@
 import React from "react";
 import {S3Image} from "aws-amplify-react";
-// prettier-ignore
 import {Card} from "element-react";
 import {convertCentsToDollars} from "../utils";
 import {UserContext} from "../App";
@@ -30,8 +29,6 @@ class Product extends React.Component {
                 {({userAttributes}) => {
                     const isProductOwner =
                         userAttributes && userAttributes.sub === product.owner;
-                    const isEmailVerified =
-                        userAttributes && userAttributes.email_verified;
 
                     return (
                         <div className="card-container">
@@ -58,12 +55,12 @@ class Product extends React.Component {
                     <span className="mx-1">
                       ${convertCentsToDollars(product.price)}
                     </span>
-                                        !isProductOwner && (
+                                        {!isProductOwner && (
                                         <PayButton
                                             product={product}
                                             userAttributes={userAttributes}
                                         />
-                                        )
+                                        )}
                                     </div>
                                 </div>
                             </Card>

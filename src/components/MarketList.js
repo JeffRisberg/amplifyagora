@@ -1,16 +1,15 @@
 import React from "react";
-import {graphqlOperation} from "aws-amplify";
-import {Connect} from "aws-amplify-react";
-import {listMarkets} from "../graphql/queries";
-import {onCreateMarket} from "../graphql/subscriptions";
-import {Card, Icon, Loading, Tag} from "element-react";
-import {Link} from "react-router-dom";
+import { graphqlOperation } from "aws-amplify";
+import { Connect } from "aws-amplify-react";
+import { listMarkets } from "../graphql/queries";
+import { onCreateMarket } from "../graphql/subscriptions";
+import { Loading, Card, Icon, Tag } from "element-react";
+import { Link } from "react-router-dom";
 import Error from "./Error";
 
-const MarketList = ({searchResults, searchTerm}) => {
-
+const MarketList = ({ searchResults }) => {
     const onNewMarket = (prevQuery, newData) => {
-        let updatedQuery = {...prevQuery};
+        let updatedQuery = { ...prevQuery };
         const updatedMarketList = [
             newData.onCreateMarket,
             ...prevQuery.listMarkets.items
@@ -25,18 +24,19 @@ const MarketList = ({searchResults, searchTerm}) => {
             subscription={graphqlOperation(onCreateMarket)}
             onSubscriptionMsg={onNewMarket}
         >
-            {({data, loading, errors}) => {
-                if (errors.length > 0) return <Error errors={errors}/>;
-                if (loading || !data.listMarkets) return <Loading fullscreen={true}/>;
+            {({ data, loading, errors }) => {
+                if (errors.length > 0) return <Error errors={errors} />;
+                if (loading || !data.listMarkets) return <Loading fullscreen={true} />;
+                const markets =
+                    searchResults.length > 0 ? searchResults : data.listMarkets.items;
 
-                const markets = searchResults.length > 0 ? searchResults : data.listMarkets.items;
-
+                console.log(markets);
                 return (
                     <>
                         {searchResults.length > 0 ? (
                             <h2 className="text-green">
-                                <Icon type="success" name="check" className="icon"/>
-                                {searchResults.length} Results for {searchTerm}
+                                <Icon type="success" name="check" className="icon" />
+                                {searchResults.length} Results
                             </h2>
                         ) : (
                             <h2 className="header">
@@ -64,15 +64,17 @@ const MarketList = ({searchResults, searchTerm}) => {
                       <Link className="link" to={`/markets/${market.id}`}>
                         {market.name}
                       </Link>
-                      <span style={{color: "var(--darkAmazonOrange)"}}>
-                        {market.products.items ? market.products.items.length : 0}
+                      <span style={{ color: "var(--darkAmazonOrange)" }}>
+                          {market.products.items && (
+                              <span>{market.products.items.length}</span>
+                          )}
                       </span>
                       <img
                           src="https://icon.now.sh/shopping_cart/f60"
                           alt="Shopping Cart"
                       />
                     </span>
-                                        <div style={{color: "var(--lightSquidInk)"}}>
+                                        <div style={{ color: "var(--lightSquidInk)" }}>
                                             {market.owner}
                                         </div>
                                     </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import {API, graphqlOperation} from "aws-amplify";
-// import { getMarket } from "../graphql/queries";
 import {onCreateProduct, onDeleteProduct, onUpdateProduct} from "../graphql/subscriptions";
 import {Icon, Loading, Tabs} from "element-react";
 import {Link} from "react-router-dom";
