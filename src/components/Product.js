@@ -1,7 +1,6 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { S3Image } from "aws-amplify-react";
-// prettier-ignore
 import { Notification, Popover, Button, Dialog, Card, Form, Input, Radio } from "element-react";
 import { updateProduct, deleteProduct } from "../graphql/mutations";
 import { convertCentsToDollars, convertDollarsToCents } from "../utils";
@@ -74,6 +73,8 @@ class Product extends React.Component {
         return (
             <UserContext.Consumer>
                 {({ userAttributes }) => {
+                    console.log(userAttributes);
+                    console.log(product.owner);
                     const isProductOwner =
                         userAttributes && userAttributes.sub === product.owner;
                     const isEmailVerified = true;
