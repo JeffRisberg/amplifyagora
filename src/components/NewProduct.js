@@ -1,9 +1,10 @@
 import React from "react";
-import {API, Auth, graphqlOperation, Storage} from "aws-amplify";
-import {createProduct} from "../graphql/mutations";
-import {PhotoPicker} from "aws-amplify-react";
+import { Storage, Auth, API, graphqlOperation } from "aws-amplify";
+import { createProduct } from "../graphql/mutations";
+import { PhotoPicker } from "aws-amplify-react";
 import aws_exports from "../aws-exports";
-import {Button, Form, Input, Notification, Progress, Radio} from "element-react";
+import { Form, Button, Input, Notification, Radio, Progress } from "element-react";
+import { convertDollarsToCents } from "../utils";
 
 const initialState = {
     description: "",
@@ -16,15 +17,16 @@ const initialState = {
 };
 
 class NewProduct extends React.Component {
-    state = {...initialState};
+    state = { ...initialState };
 
     handleAddProduct = async () => {
         try {
-            this.setState({isUploading: true});
+            this.setState({ isUploading: true });
             const visibility = "public";
-            const {identityId} = await Auth.currentCredentials();
-            const filename = `/${visibility}/${identityId}/${Date.now()}-${this.state.image.name}`;
-
+            const { identityId } = await Auth.currentCredentials();
+            const filename = `/${visibility}/${identityId}/${Date.now()}-${
+                this.state.image.name
+                }`;
             const uploadedFile = await Storage.put(filename, this.state.image.file, {
                 contentType: this.state.image.type,
                 progressCallback: progress => {
@@ -32,10 +34,10 @@ class NewProduct extends React.Component {
                     const percentUploaded = Math.round(
                         (progress.loaded / progress.total) * 100
                     );
-                    this.setState({percentUploaded});
+                    this.setState({ percentUploaded });
                 }
             });
-            const file = {  // shape of S3 object
+            const file = {
                 key: uploadedFile.key,
                 bucket: aws_exports.aws_user_files_s3_bucket,
                 region: aws_exports.aws_project_region
@@ -44,11 +46,11 @@ class NewProduct extends React.Component {
                 productMarketId: this.props.marketId,
                 description: this.state.description,
                 shipped: this.state.shipped,
-                price: this.state.price,
+                price: convertDollarsToCents(this.state.price),
                 file
             };
             const result = await API.graphql(
-                graphqlOperation(createProduct, {input})
+                graphqlOperation(createProduct, { input })
             );
             console.log("Created product", result);
             Notification({
@@ -56,7 +58,7 @@ class NewProduct extends React.Component {
                 message: "Product successfully created!",
                 type: "success"
             });
-            this.setState({...initialState});
+            this.setState({ ...initialState });
         } catch (err) {
             console.error("Error adding product", err);
         }
@@ -84,7 +86,7 @@ class NewProduct extends React.Component {
                                 icon="information"
                                 placeholder="Description"
                                 value={description}
-                                onChange={description => this.setState({description})}
+                                onChange={description => this.setState({ description })}
                             />
                         </Form.Item>
                         <Form.Item label="Set Product Price">
@@ -93,7 +95,7 @@ class NewProduct extends React.Component {
                                 icon="plus"
                                 placeholder="Price ($USD)"
                                 value={price}
-                                onChange={price => this.setState({price})}
+                                onChange={price => this.setState({ price })}
                             />
                         </Form.Item>
                         <Form.Item label="Is the Product Shipped or Emailed to the Customer?">
@@ -101,14 +103,14 @@ class NewProduct extends React.Component {
                                 <Radio
                                     value="true"
                                     checked={shipped === true}
-                                    onChange={() => this.setState({shipped: true})}
+                                    onChange={() => this.setState({ shipped: true })}
                                 >
                                     Shipped
                                 </Radio>
                                 <Radio
                                     value="false"
                                     checked={shipped === false}
-                                    onChange={() => this.setState({shipped: false})}
+                                    onChange={() => this.setState({ shipped: false })}
                                 >
                                     Emailed
                                 </Radio>
@@ -125,15 +127,14 @@ class NewProduct extends React.Component {
                             <Progress
                                 type="circle"
                                 className="progress"
-                                status="success"
                                 percentage={percentUploaded}
                             />
                         )}
                         <PhotoPicker
                             title="Product Image"
                             preview="hidden"
-                            onLoad={url => this.setState({imagePreview: url})}
-                            onPick={file => this.setState({image: file})}
+                            onLoad={url => this.setState({ imagePreview: url })}
+                            onPick={file => this.setState({ image: file })}
                             theme={{
                                 formContainer: {
                                     margin: 0,
