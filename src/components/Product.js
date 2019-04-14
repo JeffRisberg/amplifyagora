@@ -76,8 +76,7 @@ class Product extends React.Component {
                 {({ userAttributes }) => {
                     const isProductOwner =
                         userAttributes && userAttributes.sub === product.owner;
-                    const isEmailVerified =
-                        userAttributes && userAttributes.email_verified;
+                    const isEmailVerified = true;
 
                     return (
                         <div className="card-container">
