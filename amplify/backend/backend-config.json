@@ -1,0 +1,31 @@
+{
+	"auth": {
+		"cognito89de7262": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"api": {
+		"amplifyagora": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS"
+			}
+		}
+	},
+	"storage": {
+		"s3d384c702": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"function": {
+		"orderlambda": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
+		}
+	}
+}

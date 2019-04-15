@@ -1,0 +1,13 @@
+{
+    "bucketName": "amplifyagora3b5fd91e10df41f583e939d66607cb52",
+    "authPolicyName": "s3_amplify_d384c702",
+    "unauthPolicyName": "s3_amplify_d384c702",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authPermissions": "rw",
+    "unauthPermissions": ""
+}

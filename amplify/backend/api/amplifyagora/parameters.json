@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "amplifyagora",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito89de7262",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
