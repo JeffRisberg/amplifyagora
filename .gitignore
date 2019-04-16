@@ -42,3 +42,4 @@ awsconfiguration.json
 
 .idea/workspace.xml
 .idea/tasks.xml
+/amplify/backend/function/orderlambda/src/.env
