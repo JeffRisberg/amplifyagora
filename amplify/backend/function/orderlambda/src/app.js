@@ -6,10 +6,10 @@ var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 var AWS = require('aws-sdk');
 
 const config = {
-    accessKeyId: "",
-    secretAccessKey: "",
+    accessKeyId: "AKIAIVKA3F74HIMBSX7A",
+    secretAccessKey: "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",
     region: "us-west-2",
-    adminEmail: "j.s.risberg@gmai.com"
+    adminEmail: "j.s.risberg@gmail.com"
 };
 
 var ses = new AWS.SES(config);
