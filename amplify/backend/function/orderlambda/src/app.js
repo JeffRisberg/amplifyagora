@@ -7,7 +7,7 @@ var AWS = require('aws-sdk');
 
 const config = {
     accessKeyId: "AKIAIVKA3F74HIMBSX7A",
-    secretAccessKey: "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",
+    secretAccessKey: "",
     region: "us-west-2",
     adminEmail: "j.s.risberg@gmail.com"
 };
