@@ -73,8 +73,6 @@ class Product extends React.Component {
         return (
             <UserContext.Consumer>
                 {({ userAttributes }) => {
-                    console.log(userAttributes);
-                    console.log(product.owner);
                     const isProductOwner =
                         userAttributes && userAttributes.sub === product.owner;
                     const isEmailVerified = true;
