@@ -39,7 +39,6 @@ const chargeHandler = async (req, res, next) => {
         });
         if (charge.status === 'succeeded') {
             req.charge = charge;
-            req.shipped = shipped;
             req.description = description;
             next();
         }
