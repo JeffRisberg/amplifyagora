@@ -3,6 +3,16 @@ var bodyParser = require('body-parser');
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
 require('dotenv').config();
 var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+var AWS = require('aws-sdk');
+
+const config = {
+    accessKeyId: "",
+    secretAccessKey: "",
+    region: "us-west-2",
+    adminEmail: "j.s.risberg@gmai.com"
+};
+
+var ses = new AWS.SES(config);
 
 // declare a new express app
 var app = express();
