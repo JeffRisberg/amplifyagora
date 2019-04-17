@@ -33,6 +33,7 @@ const PayButton = ({ product, userAttributes }) => {
     const handleCharge = async token => {
         try {
             const ownerEmail = await getOwnerEmail(product.owner);
+            console.log({ ownerEmail });
             const result = await API.post("orderlambda", "/charge", {
                 body: {
                     token,
