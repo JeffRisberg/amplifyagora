@@ -103,7 +103,7 @@ class Product extends React.Component {
                       ${convertCentsToDollars(product.price)}
                     </span>
                                         {isEmailVerified ? (
-                                            !isProductOwner && (
+                                            isProductOwner && (
                                                 <PayButton
                                                     product={product}
                                                     userAttributes={userAttributes}

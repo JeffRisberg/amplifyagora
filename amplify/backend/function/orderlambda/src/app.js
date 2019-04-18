@@ -12,7 +12,7 @@ const config = {
     adminEmail: "j.s.risberg@gmail.com"
 };
 
-var ses = new AWS.SES(config);
+//var ses = new AWS.SES(config);
 
 // Declare a new express app
 var app = express();
@@ -45,38 +45,6 @@ const chargeHandler = async (req, res, next) => {
     } catch (err) {
         res.status(500).json({error: err});
     }
-};
-
-const emailHandler = (req, res) => {
-    const {charge} = req;
-
-    ses.sendEmail({
-        Source: config.adminEmail,
-        Return: config.adminEmail,
-        Destination: {
-            ToAddresses: [config.adminEmail]
-        },
-        Message: {
-            Subject: {
-                Data: 'Order Details - Amplify Agora'
-            },
-            Body: {
-                Html: {
-                    Charset: 'UTF-8',
-                    Data: '<h3>Your order was processed!</h3>'
-                }
-            }
-        }
-    }, (err, data) => {
-        if (err) {
-            return res.status(500).json({error: err})
-        }
-        res.json({
-            message: 'Order processed successfully!',
-            charge,
-            data
-        });
-    })
 };
 
 app.post('/charge', chargeHandler);
