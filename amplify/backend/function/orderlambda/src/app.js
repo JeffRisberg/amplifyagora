@@ -79,7 +79,7 @@ const emailHandler = (req, res) => {
     })
 };
 
-app.post('/charge', chargeHandler, emailHandler);
+app.post('/charge', chargeHandler);
 
 app.listen(3000, function () {
     console.log("App started")
