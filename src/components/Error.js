@@ -1,9 +1,9 @@
 import React from "react";
 
-const Error = ({errors}) => (
-    <pre className="error">
+const Error = ({ errors }) => (
+  <pre className="error">
     {errors.map((err, i) => (
-        <div key={i}>{err.message}</div>
+      <div key={i}>{err.message}</div>
     ))}
   </pre>
 );
