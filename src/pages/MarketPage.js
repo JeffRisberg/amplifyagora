@@ -176,7 +176,7 @@ class MarketPage extends React.Component {
             label={
               <>
                 <Icon name="menu" className="icon" />
-                Products ({market.products.items.length})
+                Products ({market.products.item ? market.products.items.length : 0})
               </>
             }
             name="2"

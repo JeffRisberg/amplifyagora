@@ -8,7 +8,7 @@ import { history } from "../App";
 
 const stripeConfig = {
     currency: "USD",
-    publishableAPIKey: "pk_test_CN8uG9E9KDNxI7xVtdN1U5Be"
+    publishableAPIKey: "pk_test_RItAnRIm3Ah5bpEjFOHBZrjm00zS2Qeacy"
 };
 
 const PayButton = ({ product, userAttributes }) => {
