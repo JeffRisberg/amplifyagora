@@ -149,5 +149,4 @@ const theme = {
     }
 };
 
-// export default withAuthenticator(App, true, [], null, theme);
 export default App;
